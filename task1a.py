@@ -5,19 +5,19 @@ import os
 from scipy.fft import fft
 from scipy.signal import convolve
 
-# Load the provided NumPy arrays
-action_potentials = np.load('action_potentials.npy')
-firing_samples = np.load('firing_samples.npy', allow_pickle=True)
+# Load in the numpy arrays provided in the task 
+action_potentials = np.load('/Users/conradolsson/Downloads/SSY081 project/TSS_project/action_potentials.npy', allow_pickle=True)
+firing_samples = np.load('/Users/conradolsson/Downloads/SSY081 project/TSS_project/firing_samples.npy', allow_pickle=True)
 
-# Constants
+# Initialize the constants 
 duration = 20.0  # Signal duration in seconds
 sampling_frequency = 10000  # Sampling frequency in Hz
-num_samples = int(duration * sampling_frequency)
+num_samples = int(duration * sampling_frequency) # How many samples there is
 
-# Create a time vector
+# Create the time vector with an interval starting on 0 and stopping at duration and length of the interval
 time_vector = np.arange(0, duration, 1/sampling_frequency)
 
-# Initialize an array to store the EMG signal
+# Create the array of the EMG signal and fill it with zeros
 emg_signal = np.zeros(num_samples)
 
 # Create EMG signal by convolving action potentials with firing times
@@ -29,9 +29,10 @@ for i in range(len(action_potentials)):
     
     # Create a train of delta functions at firing times
     delta_train = np.zeros(num_samples)
-    delta_train[np.round(firing_times * sampling_frequency).astype(int)] = 1
+    delta_train[np.around(firing_times * sampling_frequency).astype(int)] = 1
     
-    # Convolve action potentials with the delta train
+    # Convolve action potentials with the delta train and motor unit as inputs, and return the full
+    # linear convolution
     emg_signal += convolve(delta_train, motor_unit, mode='full')[:num_samples]
 
 # Plot the EMG signal

@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from scipy.signal import convolve
 from scipy.signal.windows import hann
 
-# Load the provided NumPy array for firing samples
-firing_samples = np.load('firing_samples.npy', allow_pickle=True)
+# Load in the numpy arrays for the firing samples provided in the task 
+firing_samples = np.load('/Users/conradolsson/Downloads/SSY081 project/TSS_project/firing_samples.npy', allow_pickle=True)
 
-# Constants
+# Initialize the constants 
 sampling_frequency = 10000  # Sampling frequency in Hz
 duration = 20.0  # Signal duration in seconds
 num_samples = int(duration * sampling_frequency)
@@ -15,7 +15,7 @@ window_length = int(sampling_frequency * window_duration)
 
 # Select the fourth binary vector (corresponding to the fourth motor unit)
 binary_vector = firing_samples[0][3]
-
+print(binary_vector)
 # Create a Hanning window
 hanning_window = hann(window_length)
 
