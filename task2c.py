@@ -15,7 +15,7 @@ window_length = int(sampling_frequency * window_duration)
 
 # Select the fourth binary vector (corresponding to the fourth motor unit)
 binary_vector = firing_samples[0][3]
-print(binary_vector)
+
 # Create a Hanning window
 hanning_window = hann(window_length)
 

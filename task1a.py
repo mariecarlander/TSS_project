@@ -34,6 +34,7 @@ for i in range(len(action_potentials)):
     # Convolve action potentials with the delta train and motor unit as inputs, and return the full
     # linear convolution
     emg_signal += convolve(delta_train, motor_unit, mode='full')[:num_samples]
+    print(len(firing_times)*100)
 
 # Plot the EMG signal
 plt.figure(figsize=(10, 6))
