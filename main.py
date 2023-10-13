@@ -16,8 +16,8 @@ sampling_frequency = 10000  # Sampling frequency in Hz
 num_samples = int(duration * sampling_frequency) # How many samples there is
 
 
-#Task 1a
-#building the action potential trains, 0-7
+# Task 1a
+# Building the action potential trains, 0-7
 train0 = np.zeros(num_samples)
 train0[np.around(firing_samples[0][0]).astype(int)] = 1
 
@@ -45,17 +45,17 @@ train7[np.around(firing_samples[0][7]).astype(int)] = 1
 trains = [train0, train1, train2, train3, train4, train5, train6, train7]
 
 
-#Task 1c
+# Task 1c
 # Create the time vector
 time_vector = np.arange(0, duration, 1/sampling_frequency)
 
 # Create the array for the EMG signal and fill it with zeros
 emg_signal0 = np.zeros(num_samples)
 
-#Building the emg signal for train 0
+# Building the emg signal for train 0
 emg_signal0 += convolve(train0, action_potentials[0], mode='full')[:num_samples]
 
-# Plot the EMG signal 0, figure 1
+# Plot the EMG signal 0, Figure 1
 plt.figure(figsize=(10, 6))
 plt.plot(time_vector, emg_signal0)
 plt.title("EMG Signal (Convolution) for action potential train 0")
@@ -69,7 +69,7 @@ zoom_end_time = 10.5  # End time for zooming
 zoom_start_sample = int(zoom_start_time * sampling_frequency)
 zoom_end_sample = int(zoom_end_time * sampling_frequency)
 
-# Zoom in on the time interval 10-10.5 seconds, figure 2
+# Zoom in on the time interval 10-10.5 seconds, Figure 2
 plt.figure(figsize=(10, 6))
 plt.plot(time_vector[zoom_start_sample:zoom_end_sample], emg_signal0[zoom_start_sample:zoom_end_sample], label="Zoomed In")
 plt.title("Zoomed In EMG Signal (Convolution) for action potential train 0")
@@ -77,7 +77,7 @@ plt.xlabel("Time (s)")
 plt.ylabel("Amplitude (A.U.)")
 plt.grid(True)
 
-#Task 1e
+# Task 1e
 # Create the array for the EMG signal and fill it with zeros
 emg_signal = np.zeros(num_samples)
 
@@ -85,11 +85,11 @@ emg_signal = np.zeros(num_samples)
 for i in range(len(action_potentials)):
     motor_unit = action_potentials[i]
     # Convolve action potentials with the delta train and motor unit as inputs, and return the full
-    # linear convolution
+    # Linear convolution
     emg_signal += convolve(trains[i], motor_unit)[:num_samples]
 
 
-# Total EMG signal on interval 10-10.5 seconds, figure 3
+# Total EMG signal on interval 10-10.5 seconds, Figure 3
 plt.figure(figsize=(10, 6))
 plt.plot(time_vector[zoom_start_sample:zoom_end_sample], emg_signal[zoom_start_sample:zoom_end_sample], label="Zoomed In")
 plt.title("Zoomed In EMG Signal")
@@ -97,7 +97,7 @@ plt.xlabel("Time (s)")
 plt.ylabel("Amplitude (A.U.)")
 plt.grid(True)
 
-#Task 2a
+# Task 2a
 # Initialize duration and length for the Hanning window
 window_duration = 1.0 
 window_length = int(sampling_frequency * window_duration)
@@ -132,7 +132,7 @@ plt.legend()
 plt.grid(True)
 
 
-#Task 2c
+# Task 2c
 # Select the fourth binary vector (corresponding to the fourth motor unit)
 binary_vector = firing_samples[0][4]
 
@@ -172,7 +172,7 @@ plt.grid(True)
 plt.tight_layout()
 
 
-#Task 2d
+# Task 2d
 # Select the seventh binary vector (corresponding to the fourth motor unit)
 binary_vector = firing_samples[0][7]
 
